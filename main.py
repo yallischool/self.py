@@ -1,5 +1,6 @@
 import random
 import os
+
 #choose word
 def choose_word(file_path):
     script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -8,22 +9,27 @@ def choose_word(file_path):
         words = file.read().split()
         chosen_word = random.choice(words)
         return chosen_word.lower()
-#choose word end    
+#choose word end
 
+#input is valid
 def check_valid_input(letter_guessed, old_letters_guessed):
     if len(letter_guessed) != 1 or not letter_guessed.isalpha():
         return False
     if letter_guessed in old_letters_guessed:
         return False
     return True
+#input is valid end
 
+#update letter
 def try_update_letter_guessed(letter_guessed, old_letters_guessed):
     if not check_valid_input(letter_guessed, old_letters_guessed):
         print(" -> ".join(sorted(old_letters_guessed)))
         return False
     old_letters_guessed.append(letter_guessed)
     return True
+#update letter end
 
+#show word 
 def show_hidden_word(secret_word, old_letters_guessed):
     revealed_word = ""
     for letter in secret_word:
@@ -32,13 +38,17 @@ def show_hidden_word(secret_word, old_letters_guessed):
         else:
             revealed_word += "_ "
     return revealed_word.strip()
+#show word end
 
+#check win
 def check_win(secret_word, old_letters_guessed):
     for letter in secret_word:
         if letter not in old_letters_guessed:
             return False
     return True
+#check win end
 
+#main func " hangman " end
 def hangman():
     MAX_TRIES = 6
     file_path = "word.txt" 
@@ -90,6 +100,9 @@ def hangman():
 
     print("Game over")
     print("The word was:", secret_word)
+#main func " hangman " end 
+
+
 #print pics
 def print_hangman(num_tries):
     hangman_pics = [
