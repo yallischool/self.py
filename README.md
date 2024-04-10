@@ -1,8 +1,7 @@
 
 # Hangman - a self.py project
 
-This Python project implements the classic Hangman game with a twist: you can choose the word to guess! Inspired by Campus IL's self.py interactions, the game offers an engaging experience. (MIT License)
-
+This Python project implements the Hangman game with the [self.py](https://campus.gov.il/course/cs-gov-pythonselfpy101-he/) course guidelines and you can choose the word to guess(comes with animals). the game offers an engaging experience(I hope).
 ## License
 
 [MIT License](https://choosealicense.com/licenses/mit/)
