@@ -29,5 +29,4 @@ SOFTWARE.
 - [@yallischool](https://www.github.com/yallischool)
 
 
-![Logo](https://www.kadoorie.org.il/wp-content/themes/kadoorie/images/logo.png)
 
