@@ -3,8 +3,15 @@ import os
 
 #choose word
 def choose_word(file_path):
+    print("input your file name \nif you want the defult use words.txt")
+    while True:
+        word_file_name = input("file name: ")
+        if os.path.exists(word_file_name):
+            break
+        else:
+            print("file is not found, try again")
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    file_path = os.path.join(script_dir, 'words.txt')
+    file_path = os.path.join(script_dir, word_file_name)
     with open(file_path, "r") as file:
         words = file.read().split()
         chosen_word = random.choice(words)
