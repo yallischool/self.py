@@ -55,8 +55,8 @@ def check_win(secret_word, old_letters_guessed):
     return True
 #check win end
 
-#main func " hangman " end
-def hangman():
+#main func
+def main():
     MAX_TRIES = 6
     file_path = "word.txt" 
     secret_word = choose_word(file_path)
@@ -169,4 +169,4 @@ def print_hangman(num_tries):
     print(hangman_pics[num_tries])
 #print pics end
 
-hangman()
+main()
