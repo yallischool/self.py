@@ -3,9 +3,11 @@ import os
 
 #choose word
 def choose_word(file_path):
-    print("input your file name \nif you want the defult use words.txt")
+    print("input your file name \nif you want the defult leave blank")
     while True:
         word_file_name = input("file name: ")
+        if word_file_name == "":
+            break
         if os.path.exists(word_file_name):
             break
         else:
