@@ -1,13 +1,18 @@
 import random
 import os
 
-#choose word
 def choose_word(file_path):
-    print("input your file name \nif you want the defult leave blank")
+    """
+    Chooses a random word from a file.
+
+    Args:
+    - file_path (str): The path to the file containing words.
+
+    Returns:
+    - str: The chosen word.
+    """
     while True:
         word_file_name = input("file name: ")
-        if word_file_name == "":
-            break
         if os.path.exists(word_file_name):
             break
         else:
@@ -18,28 +23,52 @@ def choose_word(file_path):
         words = file.read().split()
         chosen_word = random.choice(words)
         return chosen_word.lower()
-#choose word end
 
-#input is valid
 def check_valid_input(letter_guessed, old_letters_guessed):
+    """
+    Checks if the guessed letter is valid.
+
+    Args:
+    - letter_guessed (str): The letter guessed by the user.
+    - old_letters_guessed (list): List of letters previously guessed.
+
+    Returns:
+    - bool: True if the input is valid, False otherwise.
+    """
     if len(letter_guessed) != 1 or not letter_guessed.isalpha():
         return False
     if letter_guessed in old_letters_guessed:
         return False
     return True
-#input is valid end
 
-#update letter
 def try_update_letter_guessed(letter_guessed, old_letters_guessed):
+    """
+    Tries to update the guessed letters list.
+
+    Args:
+    - letter_guessed (str): The letter guessed by the user.
+    - old_letters_guessed (list): List of letters previously guessed.
+
+    Returns:
+    - bool: True if the letter was successfully added, False otherwise.
+    """
     if not check_valid_input(letter_guessed, old_letters_guessed):
         print(" -> ".join(sorted(old_letters_guessed)))
         return False
     old_letters_guessed.append(letter_guessed)
     return True
-#update letter end
 
-#show word 
 def show_hidden_word(secret_word, old_letters_guessed):
+    """
+    Generates a string showing the hidden letters of the word.
+
+    Args:
+    - secret_word (str): The word to be guessed.
+    - old_letters_guessed (list): List of letters previously guessed.
+
+    Returns:
+    - str: A string showing the hidden letters of the word.
+    """
     revealed_word = ""
     for letter in secret_word:
         if letter in old_letters_guessed:
@@ -47,18 +76,27 @@ def show_hidden_word(secret_word, old_letters_guessed):
         else:
             revealed_word += "_ "
     return revealed_word.strip()
-#show word end
 
-#check win
 def check_win(secret_word, old_letters_guessed):
+    """
+    Checks if the player has guessed all the letters in the word.
+
+    Args:
+    - secret_word (str): The word to be guessed.
+    - old_letters_guessed (list): List of letters previously guessed.
+
+    Returns:
+    - bool: True if all letters have been guessed, False otherwise.
+    """
     for letter in secret_word:
         if letter not in old_letters_guessed:
             return False
     return True
-#check win end
 
-#main func
 def main():
+    """
+    Main function to run the Hangman game.
+    """
     MAX_TRIES = 6
     file_path = "word.txt" 
     secret_word = choose_word(file_path)
@@ -67,7 +105,7 @@ def main():
     print("Let's play Hangman!")
     print("""
     Welcome to the game Hangman
-     _    _                                         
+    _    _                                         
     | |  | |                                        
     | |__| | __ _ _ __   __ _ _ __ ___   __ _ _ __  
     |  __  |/ _` | '_ \ / _` | '_ ` _ \ / _` | '_ \ 
@@ -87,17 +125,17 @@ def main():
                 print(revealed_word)
                 if check_win(secret_word, old_letters_guessed):
                     print("""
-            
-            
-            
-                                                        
+                    
+                    
+                    
+                    
                     ___.__. ____  __ __  __  _  ______   ____  
                     <   |  |/  _ \|  |  \ \ \/ \/ /  _ \ /    \ 
                     \___  (  <_> )  |  /  \     (  <_> )   |  \\
                     / ____|\____/|____/    \/\_/ \____/|___|  /
                     \/                                      \/ 
                             
-            
+                    
                     """)    
                     return
             else:
@@ -109,11 +147,14 @@ def main():
 
     print("Game over")
     print("The word was:", secret_word)
-#main func " hangman " end 
 
-
-#print pics
 def print_hangman(num_tries):
+    """
+    Prints the Hangman ASCII art corresponding to the number of tries left.
+
+    Args:
+    - num_tries (int): Number of attempts left.
+    """
     hangman_pics = [
         """
         x-------x
@@ -169,6 +210,5 @@ def print_hangman(num_tries):
         """
     ]
     print(hangman_pics[num_tries])
-#print pics end
-
-main()
+if __name__ == "__main__":
+    main()
