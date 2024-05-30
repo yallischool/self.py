@@ -145,7 +145,12 @@ def main():
         else:
             print("Invalid input. Please enter a single letter that has not been guessed before.")
 
-    print("Game over")
+    print("""                                                         
+   _________    _____   ____     _______  __ ___________ 
+  / ___\__  \  /     \_/ __ \   /  _ \  \/ // __ \_  __ \\
+ / /_/  > __ \|  Y Y  \  ___/  (  <_> )   /\  ___/|  | \/
+ \___  (____  /__|_|  /\___  >  \____/ \_/  \___  >__|   
+/_____/     \/      \/     \/                   \/       """)
     print("The word was:", secret_word)
 
 def print_hangman(num_tries):
