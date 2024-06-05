@@ -1,40 +1,13 @@
 import random
 import os
 
-def choose_word(file_path):
-    """
-    Chooses a random word from a file.
-
-    Args:
-    - file_path (str): The path to the file containing words.
-
-    Returns:
-    - str: The chosen word.
-    """
-    while True:
-        word_file_name = input("file name: ")
-        if os.path.exists(word_file_name):
-            break
-        else:
-            print("file is not found, try again")
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    file_path = os.path.join(script_dir, word_file_name)
+def choose_word(file_path, index):
     with open(file_path, "r") as file:
         words = file.read().split()
-        chosen_word = random.choice(words)
+        chosen_word = words[(index - 1) % len(words)]
         return chosen_word.lower()
 
 def check_valid_input(letter_guessed, old_letters_guessed):
-    """
-    Checks if the guessed letter is valid.
-
-    Args:
-    - letter_guessed (str): The letter guessed by the user.
-    - old_letters_guessed (list): List of letters previously guessed.
-
-    Returns:
-    - bool: True if the input is valid, False otherwise.
-    """
     if len(letter_guessed) != 1 or not letter_guessed.isalpha():
         return False
     if letter_guessed in old_letters_guessed:
@@ -42,16 +15,6 @@ def check_valid_input(letter_guessed, old_letters_guessed):
     return True
 
 def try_update_letter_guessed(letter_guessed, old_letters_guessed):
-    """
-    Tries to update the guessed letters list.
-
-    Args:
-    - letter_guessed (str): The letter guessed by the user.
-    - old_letters_guessed (list): List of letters previously guessed.
-
-    Returns:
-    - bool: True if the letter was successfully added, False otherwise.
-    """
     if not check_valid_input(letter_guessed, old_letters_guessed):
         print(" -> ".join(sorted(old_letters_guessed)))
         return False
@@ -59,16 +22,6 @@ def try_update_letter_guessed(letter_guessed, old_letters_guessed):
     return True
 
 def show_hidden_word(secret_word, old_letters_guessed):
-    """
-    Generates a string showing the hidden letters of the word.
-
-    Args:
-    - secret_word (str): The word to be guessed.
-    - old_letters_guessed (list): List of letters previously guessed.
-
-    Returns:
-    - str: A string showing the hidden letters of the word.
-    """
     revealed_word = ""
     for letter in secret_word:
         if letter in old_letters_guessed:
@@ -78,28 +31,16 @@ def show_hidden_word(secret_word, old_letters_guessed):
     return revealed_word.strip()
 
 def check_win(secret_word, old_letters_guessed):
-    """
-    Checks if the player has guessed all the letters in the word.
-
-    Args:
-    - secret_word (str): The word to be guessed.
-    - old_letters_guessed (list): List of letters previously guessed.
-
-    Returns:
-    - bool: True if all letters have been guessed, False otherwise.
-    """
     for letter in secret_word:
         if letter not in old_letters_guessed:
             return False
     return True
 
 def main():
-    """
-    Main function to run the Hangman game.
-    """
     MAX_TRIES = 6
-    file_path = "word.txt" 
-    secret_word = choose_word(file_path)
+    file_path = input("enter input file name: ")
+    index = int(input("enter a number"))
+    secret_word = choose_word(file_path, index)
     old_letters_guessed = []
 
     print("Let's play Hangman!")
@@ -154,12 +95,6 @@ def main():
     print("The word was:", secret_word)
 
 def print_hangman(num_tries):
-    """
-    Prints the Hangman ASCII art corresponding to the number of tries left.
-
-    Args:
-    - num_tries (int): Number of attempts left.
-    """
     hangman_pics = [
         """
         x-------x
