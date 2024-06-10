@@ -39,7 +39,7 @@ def check_win(secret_word, old_letters_guessed):
 def main():
     MAX_TRIES = 6
     file_path = input("enter input file name: ")
-    index = int(input("enter a number"))
+    index = int(input("enter a number: "))
     secret_word = choose_word(file_path, index)
     old_letters_guessed = []
 
